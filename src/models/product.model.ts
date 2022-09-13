@@ -1,7 +1,7 @@
 import { Pool, ResultSetHeader } from 'mysql2/promise';
 import Product from '../interfaces/product.interfaces';
 
-export default class BookModel {
+export default class ProductModel {
   public connection: Pool;
 
   constructor(connection: Pool) {
@@ -15,14 +15,14 @@ export default class BookModel {
     return rows as Product[];
   }
 
-  public async create(book: Product): Promise<Product> {
-    const { title, amount, orderId } = book;
+  public async create(product: Product): Promise<Product> {
+    const { name, amount } = product;
     const result = await this.connection.execute<ResultSetHeader>(
-      'INSERT INTO books (title, amount, orderId) VALUES (?, ?, ?)',
-      [title, amount, orderId],
+      'INSERT INTO Trybesmith.Products (name, amount) VALUES (?, ?)',
+      [name, amount],
     );
     const [dataInserted] = result;
     const { insertId } = dataInserted;
-    return { id: insertId, ...book };
+    return { id: insertId, ...product };
   }
 }
