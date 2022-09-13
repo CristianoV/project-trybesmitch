@@ -1,8 +1,8 @@
 interface Product {
   id?: number;
-  title: string;
+  name: string;
   amount: string;
-  orderId: number;
+  orderId?: number;
 }
   
 export default Product;
