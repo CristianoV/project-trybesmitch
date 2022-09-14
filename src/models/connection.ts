@@ -3,9 +3,9 @@ import mysql from 'mysql2/promise';
 
 dotenv.config();
 
-const DB_HOSTNAME = process.env.HOST || 'db';
-const DB_USER = process.env.USER || 'root';
-const DB_PASSWORD = process.env.PASSWORD || 'password';
+const DB_HOSTNAME = process.env.MYSQL_HOST || 'db';
+const DB_USER = process.env.MYSQL_USER || 'root';
+const DB_PASSWORD = process.env.MYSQL_PASSWORD || 'password';
 
 const connection = mysql.createPool({
   host: DB_HOSTNAME,
