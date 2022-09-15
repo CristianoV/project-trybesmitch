@@ -4,8 +4,8 @@ function validator(schema: ObjectSchema, body: 'params') {
   const { error } = schema.validate(body);
   
   if (error) {
-    const data = error.details[0].message;
-    const code = 404;
+    const [number, data] = error.details[0].message.split('|');
+    const code = Number(number);
     return { code, data };
   }
 }
