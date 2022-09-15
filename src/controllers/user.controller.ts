@@ -15,10 +15,11 @@ class UserController {
   public create = async (req: Request, res: Response) => {
     const { body } = req;
     const error = validate(userSchema, body);
-    if (error) return res.status(error.code).json({ error: error.data });
+    
+    if (error) return res.status(error.code).json({ message: error.data });
     const users = await this.usersService.getAll();
     if (users.find((user) => user.username === body.username)) {
-      return res.status(StatusCodes.CONFLICT).json({ error: 'Username already exists' });
+      return res.status(StatusCodes.CONFLICT).json({ message: 'Username already exists' });
     }
     
     const user = await this.usersService.create(body);
