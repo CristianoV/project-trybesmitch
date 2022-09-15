@@ -23,4 +23,17 @@ const userSchema = joi.object({
   }),
 });
 
-export default userSchema;
+const productsSchema = joi.object({
+  name: joi.string().min(3).required().messages({
+    'string.min': '422|"name" length must be at least 3 characters long',
+    'any.required': '400|"name" is required',
+    'string.base': '422|"name" must be a string',
+  }),
+  amount: joi.string().min(3).required().messages({
+    'string.min': '422|"amount" length must be at least 3 characters long',
+    'any.required': '400|"amount" is required',
+    'string.base': '422|"amount" must be a string',
+  }),
+});
+
+export default { userSchema, productsSchema };

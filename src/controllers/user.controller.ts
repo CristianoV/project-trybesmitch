@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import UserService from '../services/user.service';
 import validate from '../middlewares/validator';
-import userSchema from '../middlewares/schemas';
+import schema from '../middlewares/schemas';
 
 class UserController {
   constructor(private usersService = new UserService()) { }
@@ -14,7 +14,7 @@ class UserController {
 
   public create = async (req: Request, res: Response) => {
     const { body } = req;
-    const error = validate(userSchema, body);
+    const error = validate(schema.userSchema, body);
     
     if (error) return res.status(error.code).json({ message: error.data });
     const users = await this.usersService.getAll();
